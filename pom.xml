@@ -7,17 +7,17 @@
     <artifactId>easyshop-backend</artifactId>
     <version>1.0.0</version>
     <packaging>pom</packaging>
-    <name>EasyShop Backend (Aggregator)</name>
-    <description>Aggregator POM for EasyShop microservices</description>
+    <name>easyshop-parent</name>
+    <description>Parent and aggregator POM for EasyShop microservices</description>
 
 
     <modules>
-        <module>common-web</module>
-        <module>config-server</module>
-        <module>auth-service</module>
-        <module>product-service</module>
-        <module>purchase-service</module>
-        <module>api-gateway</module>
+        <module>../easyshop-common-web</module>
+        <module>../easyshop-config-server</module>
+        <module>../easyshop-api-gateway</module>
+        <module>../easyshop-auth-service</module>
+        <module>../easyshop-product-service</module>
+        <module>../easyshop-purchase-service</module>
     </modules>
 
     <properties>
@@ -25,6 +25,11 @@
         <spring-boot.version>3.3.3</spring-boot.version>
         <spring-cloud.version>2023.0.6</spring-cloud.version>
         <maven.compiler.release>${java.version}</maven.compiler.release>
+        <!-- Centralized library versions -->
+        <flyway.version>10.10.0</flyway.version>
+        <lombok.version>1.18.32</lombok.version>
+        <authorization-server.version>1.4.4</authorization-server.version>
+        <okhttp.version>4.12.0</okhttp.version>
     </properties>
 
     <!-- Spring Boot BOM drives versions of starters and many libs -->
@@ -49,6 +54,32 @@
                 <artifactId>common-web</artifactId>
                 <version>${project.version}</version>
             </dependency>
+            <!-- Directly managed libs -->
+            <dependency>
+                <groupId>org.projectlombok</groupId>
+                <artifactId>lombok</artifactId>
+                <version>${lombok.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.flywaydb</groupId>
+                <artifactId>flyway-core</artifactId>
+                <version>${flyway.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.flywaydb</groupId>
+                <artifactId>flyway-database-postgresql</artifactId>
+                <version>${flyway.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework.security</groupId>
+                <artifactId>spring-security-oauth2-authorization-server</artifactId>
+                <version>${authorization-server.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.squareup.okhttp3</groupId>
+                <artifactId>mockwebserver</artifactId>
+                <version>${okhttp.version}</version>
+            </dependency>
         </dependencies>
     </dependencyManagement>
 
@@ -65,7 +96,7 @@
                             <path>
                                 <groupId>org.projectlombok</groupId>
                                 <artifactId>lombok</artifactId>
-                                <version>1.18.32</version>
+                                <version>${lombok.version}</version>
                             </path>
                         </annotationProcessorPaths>
                     </configuration>
